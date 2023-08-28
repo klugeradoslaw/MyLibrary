@@ -2,7 +2,7 @@ package pl.klugeradoslaw.mylibrary.web;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.klugeradoslaw.mylibrary.user.UserService;
 import pl.klugeradoslaw.mylibrary.user.dto.UserRegistrationDto;
@@ -16,9 +16,8 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @GetMapping("/signup")
+    @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody UserRegistrationDto userRegistrationDto) {
         return userService.register(userRegistrationDto);
     }
-
 }

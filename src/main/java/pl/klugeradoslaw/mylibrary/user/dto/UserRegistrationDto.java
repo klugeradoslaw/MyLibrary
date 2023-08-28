@@ -1,7 +1,5 @@
 package pl.klugeradoslaw.mylibrary.user.dto;
 
-import java.util.Set;
-
 public class UserRegistrationDto {
     private String email;
     private String name;
@@ -11,6 +9,9 @@ public class UserRegistrationDto {
         this.email = email;
         this.name = name;
         this.password = password;
+    }
+
+    public UserRegistrationDto() {
     }
 
     public String getEmail() {

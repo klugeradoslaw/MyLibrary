@@ -27,10 +27,10 @@ public class SecurityConfig {
         PathRequest.H2ConsoleRequestMatcher h2ConsoleRequestMatcher = PathRequest.toH2Console();
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers(mvcMatcherBuilder.pattern("/home")).permitAll()
                 .requestMatchers(h2ConsoleRequestMatcher).permitAll()
-                .requestMatchers(mvcMatcherBuilder.pattern("/register")).permitAll()
-                .requestMatchers(antMatcher("/secured")).hasAnyRole("USER","ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/home")).permitAll()
+                .requestMatchers(mvcMatcherBuilder.pattern("/signup")).permitAll()
+                .requestMatchers(mvcMatcherBuilder.pattern("/secured")).hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()
         );
 

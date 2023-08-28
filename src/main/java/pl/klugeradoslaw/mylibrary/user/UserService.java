@@ -7,13 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.klugeradoslaw.mylibrary.user.dto.UserDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserRegistrationDto;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
 public class UserService {
-
+    private static final String USER_ROLE = "USER";
+    private static final String ADMIN_AUTHORITY = "ROLE_ADMIN";
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -35,7 +35,7 @@ public class UserService {
         user.setEmail(userRegistrationDto.getEmail());
         user.setName(userRegistrationDto.getName());
         user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword())); //{bcrypt}
-        UserRole userRole = userRoleRepository.findByName(UserRoleEnum.ROLE_USER)
+        UserRole userRole = userRoleRepository.findByName(USER_ROLE)
                 .orElseThrow(() -> new NoSuchElementException("ERROR: Role is not found.)"));
         user.getRoles().add(userRole);
         userRepository.save(user);
