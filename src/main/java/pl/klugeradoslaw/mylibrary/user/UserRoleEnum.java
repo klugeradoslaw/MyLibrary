@@ -1,4 +1,4 @@
-//package pl.klugeradoslaw.mylibrary.user;
+ //package pl.klugeradoslaw.mylibrary.user;
 //
 //public enum UserRoleEnum {
 //    ROLE_USER,

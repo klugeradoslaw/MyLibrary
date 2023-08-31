@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.klugeradoslaw.mylibrary.user.dto.UserDto;
+import pl.klugeradoslaw.mylibrary.user.dto.UserInfoDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserRegistrationDto;
 
 import java.util.NoSuchElementException;
@@ -24,9 +24,9 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<UserDto> findUserByEmail(String email) {
+    public Optional<UserInfoDto> findUserInfoByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(UserDtoMapper::map);
+                .map(UserInfoDtoMapper::map);
     }
 
     @Transactional
