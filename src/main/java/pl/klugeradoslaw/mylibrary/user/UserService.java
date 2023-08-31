@@ -31,14 +31,19 @@ public class UserService {
 
     @Transactional
     public ResponseEntity<?> register(UserRegistrationDto userRegistrationDto) {
-        User user = new User();
-        user.setEmail(userRegistrationDto.getEmail());
-        user.setName(userRegistrationDto.getName());
-        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword())); //{bcrypt}
-        UserRole userRole = userRoleRepository.findByName(USER_ROLE)
-                .orElseThrow(() -> new NoSuchElementException("ERROR: Role is not found.)"));
-        user.getRoles().add(userRole);
-        userRepository.save(user);
-        return ResponseEntity.ok("User added to database.");
+
+        if (userRepository.existsByEmail(userRegistrationDto.getEmail())) {
+            return ResponseEntity.badRequest().body("E-mail is already taken.");
+        } else {
+            User user = new User();
+            user.setEmail(userRegistrationDto.getEmail());
+            user.setName(userRegistrationDto.getName());
+            user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword())); //{bcrypt}
+            UserRole userRole = userRoleRepository.findByName(USER_ROLE)
+                    .orElseThrow(() -> new NoSuchElementException("ERROR: Role is not found.)"));
+            user.getRoles().add(userRole);
+            userRepository.save(user);
+            return ResponseEntity.ok("User added to database.");
+        }
     }
 }
