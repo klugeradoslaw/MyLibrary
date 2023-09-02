@@ -1,12 +1,12 @@
 INSERT INTO
     users(email, name, password)
 VALUES
-    -- superadmin@example.com / hard
-    ('superadmin@example.com', 'Jan', '{bcrypt}$2a$10$Ruu5GtmSVkfLeuGfz/wHUuzflCcMbwJHSBo/.Wui0EM0KIM52Gs2S'),
-    -- john@example.com / dog.8
-    ('john@example.com', 'John', '{MD5}{AlZCLSQMMNLBS5mEO0kSem9V3mxplC6cTjWy9Kj/Gxs=}d9007147eb3a5f727b2665d647d36e35'),
-    -- kluge.radoslaw@gmail.com / javaiscool
-    ('kluge.radoslaw@gmail.com', 'Radek','{argon2}$argon2id$v=19$m=4096,t=3,p=1$YBBBwx+kfrNgczYDcLlWYA$LEPgdtfskoobyFtUWTMejaE5SBRyieHYbiE5ZmFKE7I');
+    -- admin@admin.com / admin
+    ('admin@admin.com', 'Administrator', '{bcrypt}$2a$10$b0ZQzE.SGKoni4RaQ6Hut.7QBzQHHswK8GKNJHCxZvR2W7OcrZErG'),
+    -- kluge.radoslaw@gmail.com / pass123
+    ('kluge.radoslaw@gmail.com', 'Radosław Kluge', '{bcrypt}$2a$10$qqzCu4GlWFa.9WBLURs8YOWUR.mRKHbSsD8piMoaBqCB.VS.wKSRC'),
+    -- test@test.com / 1234
+    ('test@test.com', 'Tester','{bcrypt}$2a$10$If85EGk6daM8ZbwMjLRLweeJbVHL6mLQypWWTrWtGEmPhrtuQ9psK');
 
 INSERT INTO
     user_role (name)

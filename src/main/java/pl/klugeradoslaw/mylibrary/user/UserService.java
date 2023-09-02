@@ -46,7 +46,7 @@ public class UserService {
                     .orElseThrow(() -> new NoSuchElementException("ERROR: Role is not found.)"));
             user.getRoles().add(userRole);
             userRepository.save(user);
-            return ResponseEntity.ok("User added to database.");
+            return ResponseEntity.ok("Your account has been successfully created!");
         }
     }
     public List<UserResponseDto> getListOfUsers() {

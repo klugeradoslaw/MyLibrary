@@ -1,7 +1,8 @@
 package pl.klugeradoslaw.mylibrary.user.dto;
-
+import lombok.Getter;
 import java.util.Set;
 
+@Getter
 public class UserInfoDto {
     private final String email;
     private final String password;
@@ -11,16 +12,5 @@ public class UserInfoDto {
         this.email = email;
         this.password = password;
         this.roles = roles;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public Set<String> getRoles() {
-        return roles;
     }
 }
