@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
     @GetMapping("/secured")
-    ResponseEntity<String> helloSecured() {
+    public ResponseEntity<String> helloSecured() {
         log.info("Message for logged users or admins.");
         return ResponseEntity.ok("HELLO, YOU CAN SEE IT ONLY IF U ARE USER OR ADMIN.");
     }

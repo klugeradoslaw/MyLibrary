@@ -31,8 +31,7 @@ public class SecurityConfig {
                 .requestMatchers(mvcMatcherBuilder.pattern("/secured")).hasAnyRole("USER","ADMIN")
                 .anyRequest().authenticated()
         );
-
-        http.formLogin(Customizer.withDefaults());
+        http.httpBasic(Customizer.withDefaults());
         http.headers(headers -> headers
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
         http.csrf(AbstractHttpConfigurer::disable);
@@ -41,6 +40,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

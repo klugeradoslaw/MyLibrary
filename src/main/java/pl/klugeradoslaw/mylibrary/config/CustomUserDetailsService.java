@@ -25,7 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User with email %s not found".formatted(username)));
     }
 
-
     private UserDetails createUserDetails(UserInfoDto userDto) {
         return User.builder()
                 .username(userDto.getEmail())
