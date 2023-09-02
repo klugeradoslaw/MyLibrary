@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.klugeradoslaw.mylibrary.user.dto.UserInfoDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserRegistrationDto;
+import pl.klugeradoslaw.mylibrary.user.dto.UserResponseDto;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -26,7 +29,7 @@ public class UserService {
 
     public Optional<UserInfoDto> findUserInfoByEmail(String email) {
         return userRepository.findByEmail(email)
-                .map(UserInfoDtoMapper::map);
+                .map(UserDtoMapper::mapToUserInfoDto);
     }
 
     @Transactional
@@ -46,4 +49,9 @@ public class UserService {
             return ResponseEntity.ok("User added to database.");
         }
     }
+    public List<UserResponseDto> getListOfUsers() {
+        List<User> allUsers = userRepository.findAll();
+        return allUsers.stream().map(UserDtoMapper::mapToUserResponseDto).collect(Collectors.toList());
+    }
+
 }
