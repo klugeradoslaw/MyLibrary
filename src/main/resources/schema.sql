@@ -49,3 +49,11 @@ CREATE TABLE book_rating
     FOREIGN  key(user_id) references users(id)
 );
 
+CREATE TABLE user_books
+(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    book_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (book_id) REFERENCES user_role(id)
+);
