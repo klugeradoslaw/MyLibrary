@@ -1,10 +1,12 @@
 package pl.klugeradoslaw.mylibrary.rating;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import pl.klugeradoslaw.mylibrary.book.Book;
 import pl.klugeradoslaw.mylibrary.user.User;
 
 @Entity
+@Data
 @Table(name = "book_rating")
 public class Rating {
     @Id

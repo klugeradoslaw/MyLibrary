@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface BookService {
     Optional<BookDto> findBookById(Long id);
 
-
 }

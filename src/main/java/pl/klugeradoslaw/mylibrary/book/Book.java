@@ -1,12 +1,14 @@
 package pl.klugeradoslaw.mylibrary.book;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import pl.klugeradoslaw.mylibrary.genre.Genre;
 import pl.klugeradoslaw.mylibrary.rating.Rating;
 
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "books")
 public class Book {
     @Id
