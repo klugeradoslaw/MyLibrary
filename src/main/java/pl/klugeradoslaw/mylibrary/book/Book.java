@@ -7,6 +7,7 @@ import pl.klugeradoslaw.mylibrary.rating.Rating;
 import java.util.List;
 
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
@@ -17,7 +18,7 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
-    @OneToMany
+    @OneToMany(mappedBy = "book")
     private List<Rating> ratings;
     private int isbn;
 
