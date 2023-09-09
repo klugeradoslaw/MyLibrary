@@ -36,7 +36,7 @@ VALUES
     ('Java. Rusz głową!', 'Kathy Sierra', 1, 9788328399846),
     ('Wydajność Javy. Szczegółowe porady dotyczące programowania i strojenia aplikacji w Javie. Wydanie II', 'Scott Oaks', 1, 9788328370319);
 
-INSERT INTO book_rating (rate, book_id, user_id)
+INSERT INTO book_rating (rating, book_id, user_id)
 VALUES
     (9,1,2),
     (6,2,3),

@@ -20,6 +20,6 @@ public class Book {
     private Genre genre;
     @OneToMany(mappedBy = "book")
     private List<Rating> ratings;
-    private int isbn;
+    private Long isbn;
 
 }

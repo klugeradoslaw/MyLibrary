@@ -29,7 +29,7 @@ CREATE TABLE books
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL UNIQUE,
     author VARCHAR(50) NOT NULL,
-    genre_id VARCHAR(50) NOT NULL,
+    genre_id BIGINT NOT NULL,
     isbn BIGINT UNIQUE
 );
 
@@ -42,9 +42,9 @@ CREATE TABLE genres
 CREATE TABLE book_rating
 (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    rate INT NOT NULL,
-    book_id INT NOT NULL,
-    user_id INT NOT NULL,
+    rating INT NOT NULL,
+    book_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
     FOREIGN  key(book_id) references books(id),
     FOREIGN  key(user_id) references users(id)
 );

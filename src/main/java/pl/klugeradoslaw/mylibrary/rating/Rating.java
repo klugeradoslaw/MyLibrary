@@ -5,12 +5,14 @@ import pl.klugeradoslaw.mylibrary.book.Book;
 import pl.klugeradoslaw.mylibrary.user.User;
 
 @Entity
+@Table(name = "book_rating")
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int value;
+    @Column(name = "rating")
+    private int rating;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
