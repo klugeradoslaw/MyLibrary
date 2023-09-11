@@ -2,10 +2,10 @@ package pl.klugeradoslaw.mylibrary.user;
 
 import jakarta.persistence.*;
 import pl.klugeradoslaw.mylibrary.book.Book;
+import pl.klugeradoslaw.mylibrary.library.Library;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name ="users")
@@ -24,13 +24,8 @@ public class User {
     )
     private List<UserRole> roles = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name="user_books",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id")
-    )
-    private List<Book> books = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Library> libraries = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -71,11 +66,11 @@ public class User {
         this.roles = roles;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public List<Library> getLibraries() {
+        return libraries;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setLibraries(List<Library> libraries) {
+        this.libraries = libraries;
     }
 }
