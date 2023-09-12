@@ -7,16 +7,16 @@ import pl.klugeradoslaw.mylibrary.genre.dto.GenreDto;
 @Service
 public class GenreService {
     private final GenreRepository genreRepository;
+    private final GenreDtoMapper genreDtoMapper;
 
-    public GenreService(GenreRepository genreRepository) {
+    public GenreService(GenreRepository genreRepository, GenreDtoMapper genreDtoMapper) {
         this.genreRepository = genreRepository;
+        this.genreDtoMapper = genreDtoMapper;
     }
 
-    @Transactional
     public GenreDto addGenre(GenreDto genreDto) {
-        Genre genreToSave = GenreDtoMapper.mapToEntity(genreDto);
+        Genre genreToSave = genreDtoMapper.mapToEntity(genreDto);
         Genre savedGenre = genreRepository.save(genreToSave);
-        return GenreDtoMapper.mapToDto(savedGenre);
-
+        return genreDtoMapper.mapToDto(savedGenre);
     }
 }

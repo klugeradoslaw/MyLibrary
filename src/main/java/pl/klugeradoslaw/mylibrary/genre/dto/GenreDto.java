@@ -1,8 +1,13 @@
 package pl.klugeradoslaw.mylibrary.genre.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class GenreDto {
     private Long id;
     private String name;

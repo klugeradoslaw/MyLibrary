@@ -1,18 +1,21 @@
 package pl.klugeradoslaw.mylibrary.genre;
 
+import org.springframework.stereotype.Service;
 import pl.klugeradoslaw.mylibrary.genre.dto.GenreDto;
 
+@Service
 public class GenreDtoMapper {
-    public static GenreDto mapToDto(Genre genre) {
+    public GenreDto mapToDto(Genre genre) {
         GenreDto genreDto = new GenreDto();
         genreDto.setId(genre.getId());
         genreDto.setName(genre.getName());
         return genreDto;
     }
 
-    public static Genre mapToEntity(GenreDto genreDto) {
+    public Genre mapToEntity(GenreDto genreDto) {
         Genre genre = new Genre();
-        genreDto.setName(genreDto.getName());
+        genre.setId(genreDto.getId());
+        genre.setName(genreDto.getName());
         return genre;
     }
 }
