@@ -19,8 +19,7 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
+    private Long isbn;
     @OneToMany(mappedBy = "book")
     private List<Rating> ratings;
-    private Long isbn;
-
 }

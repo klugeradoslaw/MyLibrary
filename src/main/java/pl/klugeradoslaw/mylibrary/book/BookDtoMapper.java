@@ -12,8 +12,8 @@ public class BookDtoMapper {
         bookDto.setTitle(book.getTitle());
         bookDto.setAuthor(book.getAuthor());
         bookDto.setGenre(book.getGenre().toString());
-        bookDto.setAvgRating(avgRating);
         bookDto.setIsbn(book.getIsbn());
+        bookDto.setAvgRating(avgRating);
         return bookDto;
     }
 }

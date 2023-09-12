@@ -42,3 +42,17 @@ VALUES
     (6, 2, 3),
     (8, 2, 2);
 
+INSERT INTO library (user_id, name)
+VALUES
+    (1, 'My Library'),
+    (2, 'Kluge Library'),
+    (2, 'Want to buy');
+
+INSERT INTO books_in_library(library_id, book_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (2, 1),
+    (2, 3),
+    (3, 2);

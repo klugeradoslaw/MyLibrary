@@ -1,5 +1,11 @@
-DROP TABLE IF EXISTS  user_role;
 DROP TABLE IF EXISTS  users;
+DROP TABLE IF EXISTS  user_role;
+DROP TABLE IF EXISTS  user_roles;
+DROP TABLE IF EXISTS  books;
+DROP TABLE IF EXISTS  genres;
+DROP TABLE IF EXISTS  book_rating;
+DROP TABLE IF EXISTS  library;
+DROP TABLE IF EXISTS  books_in_library;
 
 CREATE TABLE users
 (
@@ -53,7 +59,15 @@ CREATE TABLE library
 (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE books_in_library
+(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    library_id BIGINT NOT NULL,
     book_id BIGINT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (book_id) REFERENCES user_role(id)
+    FOREIGN  key(library_id) references library(id),
+    FOREIGN  key(book_id) references books(id)
 );

@@ -7,6 +7,7 @@ import pl.klugeradoslaw.mylibrary.user.User;
 import java.util.List;
 
 @Entity
+@Table(name = "library")
 public class Library {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +20,8 @@ public class Library {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "library",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            name = "books_in_library",
+            joinColumns = @JoinColumn(name = "library_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id")
     )
     private List<Book> myLibrary;
