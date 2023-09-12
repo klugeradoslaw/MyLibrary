@@ -23,10 +23,10 @@ public class GenreAdminController {
     @PostMapping("/genre")
     public ResponseEntity<?> addGenre(@RequestBody GenreDto genreDto) {
         GenreDto addedGenre = genreService.addGenre(genreDto);
-//        URI addedGenreUri = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(addedGenre.getId())
-//                .toUri();
-        return ResponseEntity.ok(addedGenre);
+        URI addedGenreUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(addedGenre.getId())
+                .toUri();
+        return ResponseEntity.created(addedGenreUri).body(addedGenre);
     }
 }
