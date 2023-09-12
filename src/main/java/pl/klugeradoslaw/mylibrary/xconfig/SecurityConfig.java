@@ -1,4 +1,4 @@
-package pl.klugeradoslaw.mylibrary.config;
+package pl.klugeradoslaw.mylibrary.xconfig;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .requestMatchers(mvcMatcherBuilder.pattern("/signup")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/books/**")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/secured")).hasAnyRole("USER","ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
         http.httpBasic(Customizer.withDefaults());

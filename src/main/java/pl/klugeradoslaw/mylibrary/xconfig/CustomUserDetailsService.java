@@ -1,4 +1,4 @@
-package pl.klugeradoslaw.mylibrary.config;
+package pl.klugeradoslaw.mylibrary.xconfig;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
