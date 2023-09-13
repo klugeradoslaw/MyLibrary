@@ -1,12 +1,16 @@
 package pl.klugeradoslaw.mylibrary.library;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import pl.klugeradoslaw.mylibrary.book.Book;
 import pl.klugeradoslaw.mylibrary.user.User;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "library")
 public class Library {
     @Id
@@ -24,5 +28,5 @@ public class Library {
             joinColumns = @JoinColumn(name = "library_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id")
     )
-    private List<Book> myLibrary;
+    private List<Book> myBooks;
 }
