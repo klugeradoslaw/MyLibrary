@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import pl.klugeradoslaw.mylibrary.user.User;
 import pl.klugeradoslaw.mylibrary.user.UserService;
 import pl.klugeradoslaw.mylibrary.user.dto.UserResponseDto;
 
@@ -32,5 +34,9 @@ public class UserController {
     @GetMapping("/secured/users")
     public ResponseEntity<List<UserResponseDto>> getListOfUsers() {
         return ResponseEntity.ok(userService.getListOfUsers());
+    }
+    @GetMapping("/admin/user")
+    public ResponseEntity<User> getUserByEmail (@RequestParam String email){
+        return ResponseEntity.ok(userService.findUserByEmail(email).orElseThrow());
     }
 }
