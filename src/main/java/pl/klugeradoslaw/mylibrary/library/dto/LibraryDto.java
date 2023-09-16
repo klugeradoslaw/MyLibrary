@@ -19,8 +19,7 @@ import java.util.List;
 
 public class LibraryDto {
     private Long id;
-    @JsonIgnore
-    private User user;
+    private String userEmail;
     private String name;
     private List<Book> myBooks;
 }

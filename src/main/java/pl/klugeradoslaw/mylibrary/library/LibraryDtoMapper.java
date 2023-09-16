@@ -22,7 +22,7 @@ public class LibraryDtoMapper {
     public LibraryDto map(Library library) {
         LibraryDto libraryDto = new LibraryDto();
         libraryDto.setId(library.getId());
-        libraryDto.setUser(library.getUser());
+        libraryDto.setUserEmail(library.getUser().getEmail());
         libraryDto.setName(library.getName());
         libraryDto.setMyBooks(library.getMyBooks());
         return libraryDto;
