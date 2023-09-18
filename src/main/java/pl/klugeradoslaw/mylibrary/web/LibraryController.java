@@ -3,10 +3,7 @@ package pl.klugeradoslaw.mylibrary.web;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.klugeradoslaw.mylibrary.library.LibraryDtoMapper;
 import pl.klugeradoslaw.mylibrary.library.LibraryService;
@@ -28,7 +25,7 @@ public class LibraryController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addLibrary (@RequestParam String libraryName, Authentication authentication) {
+    public ResponseEntity<?> addLibrary(@RequestParam String libraryName, Authentication authentication) {
         String currentUserEmail = authentication.getName();
         LibraryDto savedLibraryDto = libraryService.addLibrary(currentUserEmail, libraryName);
         URI addedLibraryUri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -39,8 +36,19 @@ public class LibraryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LibraryDto>> getLibrariesByEmail (@RequestParam String email) {
+    public ResponseEntity<List<LibraryDto>> getLibrariesByEmail(@RequestParam String email) {
         List<LibraryDto> listOfLibrariesByEmail = libraryService.getListOfLibrariesByEmail(email);
         return ResponseEntity.ok(listOfLibrariesByEmail);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteLibrary(@PathVariable Long id, Authentication authentication) {
+        String currentUserEmail = authentication.getName();
+        if (libraryService.getOwnerByLibraryId(id).equals(currentUserEmail)) {
+            libraryService.deleteLibrary(id);
+            return ResponseEntity.ok("Library deleted successfully.");
+        } else {
+            return ResponseEntity.ok("You dont have permission to delete this library!");
+        }
     }
 }
