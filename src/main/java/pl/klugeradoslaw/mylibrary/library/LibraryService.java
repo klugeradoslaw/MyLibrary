@@ -8,6 +8,7 @@ import pl.klugeradoslaw.mylibrary.user.UserService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -33,8 +34,10 @@ public class LibraryService {
         return libraryDtoMapper.map(savedLibrary);
     }
 
-    //   public List<LibraryDto> getListOfLibrariesByEmail (String userEmail) {
-//
-//    }
-
+    public List<LibraryDto> getListOfLibrariesByEmail (String userEmail) {
+        User userByEmail = userService.findUserByEmail(userEmail).orElseThrow();
+        List<Library> librariesByUser_id = libraryRepository.getLibrariesByUser_Id(userByEmail.getId());
+        List<LibraryDto> listOfLibraries = librariesByUser_id.stream().map(libraryDtoMapper::map).toList();
+        return listOfLibraries;
+    }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface LibraryRepository extends JpaRepository<Library, Long> {
-//List<Library> getLibrariesBy;
+    List<Library> getLibrariesByUser_Id (long userId);
 }

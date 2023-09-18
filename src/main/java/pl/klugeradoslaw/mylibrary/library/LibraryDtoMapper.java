@@ -1,6 +1,7 @@
 package pl.klugeradoslaw.mylibrary.library;
 
 import org.springframework.stereotype.Service;
+import pl.klugeradoslaw.mylibrary.book.Book;
 import pl.klugeradoslaw.mylibrary.library.dto.LibraryDto;
 import pl.klugeradoslaw.mylibrary.library.dto.LibrarySaveDto;
 import pl.klugeradoslaw.mylibrary.user.User;
@@ -24,7 +25,7 @@ public class LibraryDtoMapper {
         libraryDto.setId(library.getId());
         libraryDto.setUserEmail(library.getUser().getEmail());
         libraryDto.setName(library.getName());
-        libraryDto.setMyBooks(library.getMyBooks());
+        libraryDto.setMyBooks(library.getMyBooks().stream().map(Book::getTitle).toList());
         return libraryDto;
     }
 
