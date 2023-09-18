@@ -1,5 +1,7 @@
 package pl.klugeradoslaw.mylibrary.user;
 
+import pl.klugeradoslaw.mylibrary.library.Library;
+import pl.klugeradoslaw.mylibrary.library.dto.LibraryDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserInfoDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserResponseDto;
 
@@ -20,6 +22,7 @@ public class UserDtoMapper {
         long id = user.getId();
         String email = user.getEmail();
         String name = user.getName();
-        return new UserResponseDto(id, email, name);
+        List<String> libraries = user.getLibraries().stream().map(Library::getName).collect(Collectors.toList());
+        return new UserResponseDto(id, email, name, libraries);
     }
 }

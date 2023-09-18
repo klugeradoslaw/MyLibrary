@@ -32,7 +32,10 @@ public class UserService {
                 .map(UserDtoMapper::mapToUserInfoDto);
     }
 
-    public Optional<UserResponseDto> findUserByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    public Optional<UserResponseDto> findUserDtoByEmail(String email) {
         return userRepository.findByEmail(email)
                 .map(UserDtoMapper::mapToUserResponseDto);
     }
