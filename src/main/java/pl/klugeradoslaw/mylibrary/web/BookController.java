@@ -30,8 +30,4 @@ public class BookController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-//    @PostMapping("/{id}")
-//    public ResponseEntity<?> addBookToYourLibrary(@PathVariable Long id) {
-//    }
-
 }

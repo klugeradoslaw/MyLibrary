@@ -6,6 +6,7 @@ import pl.klugeradoslaw.mylibrary.library.dto.LibrarySaveDto;
 import pl.klugeradoslaw.mylibrary.user.User;
 import pl.klugeradoslaw.mylibrary.user.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,5 +32,9 @@ public class LibraryService {
         Library savedLibrary = libraryRepository.save(libraryToSave);
         return libraryDtoMapper.map(savedLibrary);
     }
+
+    //   public List<LibraryDto> getListOfLibrariesByEmail (String userEmail) {
+//
+//    }
 
 }
