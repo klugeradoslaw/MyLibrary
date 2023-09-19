@@ -38,6 +38,5 @@ public class GenreAdminController {
             log.info("Access denied.");
             return new ResponseEntity<>("error", HttpStatus.FORBIDDEN);
         }
-
     }
 }

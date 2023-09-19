@@ -44,7 +44,8 @@ public class LibraryController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteLibrary(@PathVariable Long id, Authentication authentication) {
         String currentUserEmail = authentication.getName();
-        if (libraryService.getOwnerByLibraryId(id).equals(currentUserEmail)) {
+        if (libraryService.getOwnerByLibraryId(id).equals(currentUserEmail) ||
+                authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             libraryService.deleteLibrary(id);
             return ResponseEntity.ok("Library deleted successfully.");
         } else {
