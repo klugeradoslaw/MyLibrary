@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.klugeradoslaw.mylibrary.user.User;
 import pl.klugeradoslaw.mylibrary.user.UserService;
@@ -37,13 +34,26 @@ public class AccountController {
         // TO DO:
         // when deleting User, method have to delete added by this user ratings and other......
 
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
         String currentUserEmail = authentication.getName();
         User userById = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (userById.getEmail().equals(currentUserEmail) ||
                 authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             userService.deleteUser(id);
+            return ResponseEntity.ok("User " + currentUserEmail + " deleted successfully.");
+        } else {
+            return ResponseEntity.ok("You dont have permission to delete this user!");
+        }
+    }
+
+    @DeleteMapping("/user")
+    public ResponseEntity<?> deleteUser(@RequestParam String email, Authentication authentication) {
+        String currentUserEmail = authentication.getName();
+        User userByEmail = userService.findUserByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        if (userByEmail.getEmail().equals(currentUserEmail) ||
+                authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            userService.deleteUser(email);
             return ResponseEntity.ok("User " + currentUserEmail + " deleted successfully.");
         } else {
             return ResponseEntity.ok("You dont have permission to delete this user!");

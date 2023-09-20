@@ -64,6 +64,9 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+    public void deleteUser(String email) {
+        userRepository.delete(findUserByEmail(email).orElseThrow(() -> new NoSuchElementException("ERROR: User is not found.)")));
+    }
 
     public List<UserResponseDto> getListOfUsers() {
         List<User> allUsers = userRepository.findAll();
