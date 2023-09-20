@@ -20,7 +20,12 @@ public class RegistrationController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody UserRegistrationDto userRegistrationDto) {
-        log.info("User added to database.");
-        return userService.register(userRegistrationDto);
+        if (!userService.existsByEmail(userRegistrationDto.getEmail())) {
+            userService.register(userRegistrationDto);
+            log.info("User added to database.");
+            return ResponseEntity.ok("Your account has been successfully created!");
+        } else {
+            return ResponseEntity.badRequest().body("E-mail is already taken.");
+        }
     }
 }

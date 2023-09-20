@@ -41,11 +41,7 @@ public class UserService {
     }
 
     @Transactional
-    public ResponseEntity<?> register(UserRegistrationDto userRegistrationDto) {
-
-        if (userRepository.existsByEmail(userRegistrationDto.getEmail())) {
-            return ResponseEntity.badRequest().body("E-mail is already taken.");
-        } else {
+    public void register(UserRegistrationDto userRegistrationDto) {
             User user = new User();
             user.setEmail(userRegistrationDto.getEmail());
             user.setName(userRegistrationDto.getName());
@@ -54,12 +50,13 @@ public class UserService {
                     .orElseThrow(() -> new NoSuchElementException("ERROR: Role is not found.)"));
             user.getRoles().add(userRole);
             userRepository.save(user);
-            return ResponseEntity.ok("Your account has been successfully created!");
-        }
     }
     public List<UserResponseDto> getListOfUsers() {
         List<User> allUsers = userRepository.findAll();
         return allUsers.stream().map(UserDtoMapper::mapToUserResponseDto).collect(Collectors.toList());
     }
 
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
 }
