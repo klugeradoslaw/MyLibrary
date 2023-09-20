@@ -40,6 +40,12 @@ public class UserService {
                 .map(UserDtoMapper::mapToUserResponseDto);
     }
 
+    public Optional<UserResponseDto> findUserDtoById(Long id) {
+        return userRepository.findById(id)
+                .map(UserDtoMapper::mapToUserResponseDto);
+    }
+
+
     @Transactional
     public void register(UserRegistrationDto userRegistrationDto) {
             User user = new User();
