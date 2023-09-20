@@ -35,6 +35,10 @@ public class UserService {
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
     public Optional<UserResponseDto> findUserDtoByEmail(String email) {
         return userRepository.findByEmail(email)
                 .map(UserDtoMapper::mapToUserResponseDto);
@@ -44,7 +48,6 @@ public class UserService {
         return userRepository.findById(id)
                 .map(UserDtoMapper::mapToUserResponseDto);
     }
-
 
     @Transactional
     public void register(UserRegistrationDto userRegistrationDto) {
@@ -57,6 +60,11 @@ public class UserService {
             user.getRoles().add(userRole);
             userRepository.save(user);
     }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
     public List<UserResponseDto> getListOfUsers() {
         List<User> allUsers = userRepository.findAll();
         return allUsers.stream().map(UserDtoMapper::mapToUserResponseDto).collect(Collectors.toList());
@@ -65,4 +73,5 @@ public class UserService {
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
 }
