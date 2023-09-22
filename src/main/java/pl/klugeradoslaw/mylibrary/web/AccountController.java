@@ -1,5 +1,10 @@
 package pl.klugeradoslaw.mylibrary.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatchException;
+import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,20 +14,24 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import pl.klugeradoslaw.mylibrary.user.User;
 import pl.klugeradoslaw.mylibrary.user.UserService;
-import pl.klugeradoslaw.mylibrary.user.dto.UserRegistrationDto;
+import pl.klugeradoslaw.mylibrary.user.dto.UserAccountDto;
+
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Controller
 public class AccountController {
 
     private final UserService userService;
+    private final ObjectMapper objectMapper;
 
-    public AccountController(UserService userService) {
+    public AccountController(UserService userService, ObjectMapper objectMapper) {
         this.userService = userService;
+        this.objectMapper = objectMapper;
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody UserRegistrationDto userRegistrationDto) {
+    public ResponseEntity<?> register(@RequestBody UserAccountDto userRegistrationDto) {
         if (!userService.existsByEmail(userRegistrationDto.getEmail())) {
             userService.register(userRegistrationDto);
             log.info("User added to database.");
@@ -31,10 +40,32 @@ public class AccountController {
             return ResponseEntity.badRequest().body("E-mail is already taken.");
         }
     }
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
+        try {
+            UserAccountDto userAccountDto = userService.findUserAccountDtoById(id).orElseThrow();
+            UserAccountDto userPatched = applyPatch(userAccountDto, patch);
+            userService.updateUser(userPatched);
+            log.info("Updated User with id ={}", id);
+            return ResponseEntity.ok(userService.findUserAccountDtoById(id));
+        } catch (JsonPatchException | JsonProcessingException e) {
+            return ResponseEntity.internalServerError().build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    private UserAccountDto applyPatch(UserAccountDto userAccountDto, JsonMergePatch patch) throws JsonPatchException, JsonProcessingException {
+        JsonNode userNode = objectMapper.valueToTree(userAccountDto);
+        JsonNode userPatchedNode = patch.apply(userNode);
+        return objectMapper.treeToValue(userPatchedNode, UserAccountDto.class);
+    }
+
+
+
         // TO DO:
         // when deleting User, method have to delete added by this user ratings and other......
-
-    @DeleteMapping("/user/{id}")
+        @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
         String currentUserEmail = authentication.getName();
         User userById = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

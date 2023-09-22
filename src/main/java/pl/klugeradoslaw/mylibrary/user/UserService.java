@@ -1,11 +1,10 @@
 package pl.klugeradoslaw.mylibrary.user;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.klugeradoslaw.mylibrary.user.dto.UserInfoDto;
-import pl.klugeradoslaw.mylibrary.user.dto.UserRegistrationDto;
+import pl.klugeradoslaw.mylibrary.user.dto.UserAccountDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserResponseDto;
 
 import java.util.List;
@@ -34,6 +33,7 @@ public class UserService {
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
+
     }
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
@@ -43,14 +43,17 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .map(UserDtoMapper::mapToUserResponseDto);
     }
-
     public Optional<UserResponseDto> findUserDtoById(Long id) {
         return userRepository.findById(id)
                 .map(UserDtoMapper::mapToUserResponseDto);
     }
+    public Optional<UserAccountDto> findUserAccountDtoById(Long id) {
+        return userRepository.findById(id)
+                .map(UserDtoMapper::mapToUserAccountDto);
+    }
 
     @Transactional
-    public void register(UserRegistrationDto userRegistrationDto) {
+    public void register(UserAccountDto userRegistrationDto) {
             User user = new User();
             user.setEmail(userRegistrationDto.getEmail());
             user.setName(userRegistrationDto.getName());
@@ -77,4 +80,12 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
+    public void updateUser (UserAccountDto userUpdateDto) {
+        User user = new User();
+        user.setId(userUpdateDto.getId());
+        user.setEmail(userUpdateDto.getEmail());
+        user.setName(userUpdateDto.getName());
+        user.setPassword(passwordEncoder.encode(userUpdateDto.getPassword())); //{bcrypt}
+        userRepository.save(user);
+    }
 }
