@@ -59,5 +59,10 @@ public class LibraryController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    @GetMapping("/my")
+    public ResponseEntity<List<LibraryDto>> getMyLibraries (Authentication authentication) {
+        String currentUserEmail = authentication.getName();
+        List<LibraryDto> listOfLibrariesByEmail = libraryService.getListOfLibrariesByEmail(currentUserEmail);
+        return ResponseEntity.ok(listOfLibrariesByEmail);
+    }
 }

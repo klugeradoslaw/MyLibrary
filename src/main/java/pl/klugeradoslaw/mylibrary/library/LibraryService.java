@@ -49,8 +49,9 @@ public class LibraryService {
         return library.getUser().getEmail();
     }
 
-    public Optional<LibraryDto> getLibrary (Long id) {
-        return libraryRepository.findById(id)
+    public Optional<LibraryDto> getLibrary (Long libraryId) {
+        return libraryRepository.findById(libraryId)
                 .map(LibraryDtoMapper::map);
     }
+
 }
