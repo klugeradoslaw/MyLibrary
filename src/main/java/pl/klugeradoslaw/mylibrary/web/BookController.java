@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.klugeradoslaw.mylibrary.book.BookService;
 import pl.klugeradoslaw.mylibrary.book.dto.BookDto;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(
@@ -24,10 +26,19 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDto> findBookById (@PathVariable Long id) {
+    public ResponseEntity<BookDto> findBookById(@PathVariable Long id) {
         return bookService.findBookById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    //Get all books or containing word or some letters
+    @GetMapping
+    public ResponseEntity<List<BookDto>> getAllBooks(@RequestParam(required = false) String title) {
+        if (title != null)
+            return ResponseEntity.ok(bookService.findBooksByTitle(title));
+        else
+            return ResponseEntity.ok(bookService.findAll());
     }
 
 }
