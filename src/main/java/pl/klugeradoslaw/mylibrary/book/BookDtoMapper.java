@@ -4,7 +4,7 @@ import pl.klugeradoslaw.mylibrary.book.dto.BookDto;
 import pl.klugeradoslaw.mylibrary.rating.Rating;
 
 public class BookDtoMapper {
-    public static BookDto mapToDto(Book book) {
+    static BookDto mapToDto(Book book) {
         double avgRating = book.getRatings().stream()
                 .mapToDouble(Rating::getRating)
                 .average().orElse(0);

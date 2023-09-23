@@ -1,7 +1,6 @@
 package pl.klugeradoslaw.mylibrary.library;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.klugeradoslaw.mylibrary.library.dto.LibraryDto;
 import pl.klugeradoslaw.mylibrary.library.dto.LibrarySaveDto;
@@ -49,9 +48,14 @@ public class LibraryService {
         return library.getUser().getEmail();
     }
 
-    public Optional<LibraryDto> getLibrary (Long libraryId) {
+    public Optional<LibraryDto> findLibraryById(Long libraryId) {
         return libraryRepository.findById(libraryId)
                 .map(LibraryDtoMapper::map);
     }
 
+    public void updateLibrary(Long libraryId, LibraryDto libraryUpdateDto) {
+        Library libraryById = libraryRepository.findById(libraryId).orElseThrow();
+        libraryById.setName(libraryUpdateDto.getName());
+        libraryRepository.save(libraryById);
+    }
 }

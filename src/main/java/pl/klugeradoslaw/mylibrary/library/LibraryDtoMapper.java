@@ -4,12 +4,9 @@ import org.springframework.stereotype.Service;
 import pl.klugeradoslaw.mylibrary.book.Book;
 import pl.klugeradoslaw.mylibrary.library.dto.LibraryDto;
 import pl.klugeradoslaw.mylibrary.library.dto.LibrarySaveDto;
-import pl.klugeradoslaw.mylibrary.user.User;
 import pl.klugeradoslaw.mylibrary.user.UserService;
 
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class LibraryDtoMapper {

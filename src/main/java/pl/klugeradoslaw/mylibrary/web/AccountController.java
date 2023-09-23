@@ -73,7 +73,7 @@ public class AccountController {
         // TO DO:
         // when deleting User, method have to delete added by this user ratings and other......
         @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
+        public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
         String currentUserEmail = authentication.getName();
         User userById = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (userById.getEmail().equals(currentUserEmail) ||
