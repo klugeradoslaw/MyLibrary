@@ -41,17 +41,24 @@ public class AccountController {
         }
     }
     @PatchMapping("/user/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
-        try {
-            UserAccountDto userAccountDto = userService.findUserAccountDtoById(id).orElseThrow();
-            UserAccountDto userPatched = applyPatch(userAccountDto, patch);
-            userService.updateUser(userPatched);
-            log.info("Updated User with id ={}", id);
-            return ResponseEntity.ok(userService.findUserAccountDtoById(id));
-        } catch (JsonPatchException | JsonProcessingException e) {
-            return ResponseEntity.internalServerError().build();
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody JsonMergePatch patch, Authentication authentication) {
+        String currentUserEmail = authentication.getName();
+        User userById = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        if (userById.getEmail().equals(currentUserEmail) ||
+                authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            try {
+                UserAccountDto userAccountDto = userService.findUserAccountDtoById(id).orElseThrow();
+                UserAccountDto userPatched = applyPatch(userAccountDto, patch);
+                userService.updateUser(userPatched);
+                log.info("Updated User with id ={}", id);
+                return ResponseEntity.ok(userService.findUserAccountDtoById(id));
+            } catch (JsonPatchException | JsonProcessingException e) {
+                return ResponseEntity.internalServerError().build();
+            } catch (NoSuchElementException e) {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.ok("You dont have permission to delete this user!");
         }
     }
 
