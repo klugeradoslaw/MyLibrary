@@ -35,12 +35,6 @@ public class LibraryController {
         return ResponseEntity.created(addedLibraryUri).body(savedLibraryDto);
     }
 
-    @GetMapping
-    public ResponseEntity<List<LibraryDto>> getLibrariesByEmail(@RequestParam String email) {
-        List<LibraryDto> listOfLibrariesByEmail = libraryService.getListOfLibrariesByEmail(email);
-        return ResponseEntity.ok(listOfLibrariesByEmail);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteLibrary(@PathVariable Long id, Authentication authentication) {
         String currentUserEmail = authentication.getName();
@@ -52,4 +46,18 @@ public class LibraryController {
             return ResponseEntity.ok("You dont have permission to delete this library!");
         }
     }
+
+    @GetMapping
+    public ResponseEntity<List<LibraryDto>> getLibrariesByEmail(@RequestParam String email) {
+        List<LibraryDto> listOfLibrariesByEmail = libraryService.getListOfLibrariesByEmail(email);
+        return ResponseEntity.ok(listOfLibrariesByEmail);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LibraryDto> getLibraryById (@PathVariable Long id) {
+        return libraryService.getLibrary(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

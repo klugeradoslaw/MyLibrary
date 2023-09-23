@@ -15,13 +15,11 @@ import java.util.Optional;
 @Service
 public class LibraryService {
     private final LibraryRepository libraryRepository;
-    private final LibraryDtoMapper libraryDtoMapper;
     private final UserService userService;
 
 
-    public LibraryService(LibraryRepository libraryRepository, LibraryDtoMapper libraryDtoMapper, UserService userService) {
+    public LibraryService(LibraryRepository libraryRepository, UserService userService) {
         this.libraryRepository = libraryRepository;
-        this.libraryDtoMapper = libraryDtoMapper;
         this.userService = userService;
     }
 
@@ -30,15 +28,15 @@ public class LibraryService {
         User user = userService.findUserByEmail(userEmail).orElseThrow();
         librarySaveDto.setUser(user);
         librarySaveDto.setName(name);
-        Library libraryToSave = libraryDtoMapper.map(librarySaveDto);
+        Library libraryToSave = LibraryDtoMapper.map(librarySaveDto);
         Library savedLibrary = libraryRepository.save(libraryToSave);
-        return libraryDtoMapper.map(savedLibrary);
+        return LibraryDtoMapper.map(savedLibrary);
     }
 
     public List<LibraryDto> getListOfLibrariesByEmail (String userEmail) {
         User userByEmail = userService.findUserByEmail(userEmail).orElseThrow();
         List<Library> librariesByUser_id = libraryRepository.getLibrariesByUser_Id(userByEmail.getId());
-        List<LibraryDto> listOfLibraries = librariesByUser_id.stream().map(libraryDtoMapper::map).toList();
+        List<LibraryDto> listOfLibraries = librariesByUser_id.stream().map(LibraryDtoMapper::map).toList();
         return listOfLibraries;
     }
 
@@ -49,5 +47,10 @@ public class LibraryService {
     public String getOwnerByLibraryId(Long libraryId) {
         Library library = libraryRepository.findById(libraryId).orElseThrow();
         return library.getUser().getEmail();
+    }
+
+    public Optional<LibraryDto> getLibrary (Long id) {
+        return libraryRepository.findById(id)
+                .map(LibraryDtoMapper::map);
     }
 }

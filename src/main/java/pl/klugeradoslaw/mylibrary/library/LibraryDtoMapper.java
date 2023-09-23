@@ -20,7 +20,7 @@ public class LibraryDtoMapper {
         this.userService = userService;
     }
 
-    public LibraryDto map(Library library) {
+    static LibraryDto map(Library library) {
         LibraryDto libraryDto = new LibraryDto();
         libraryDto.setId(library.getId());
         libraryDto.setUserEmail(library.getUser().getEmail());
@@ -29,7 +29,7 @@ public class LibraryDtoMapper {
         return libraryDto;
     }
 
-    public Library map(LibrarySaveDto librarySaveDto) {
+    static Library map(LibrarySaveDto librarySaveDto) {
         Library newLibrary = new Library();
         newLibrary.setName(librarySaveDto.getName());
         newLibrary.setUser(librarySaveDto.getUser());
