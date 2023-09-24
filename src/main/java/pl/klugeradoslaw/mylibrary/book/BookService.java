@@ -20,11 +20,12 @@ public class BookService {
         this.bookRepository = bookRepository;
         this.genreService = genreService;
     }
+
     public Optional<BookDto> findBookById(Long id) {
         return bookRepository.findById(id).map(BookDtoMapper::map);
     }
 
-    public List<BookDto> findBooksByTitle (String title) {
+    public List<BookDto> findBooksByTitle(String title) {
         return bookRepository.findAllByTitleContainingIgnoreCase(title)
                 .stream()
                 .map(BookDtoMapper::map)
@@ -38,7 +39,7 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    public BookDto addBook (BookSaveDto bookSaveDto) {
+    public BookDto addBook(BookSaveDto bookSaveDto) {
         Book book = new Book();
         book.setTitle(bookSaveDto.getTitle());
         book.setAuthor(bookSaveDto.getAuthor());
@@ -47,6 +48,23 @@ public class BookService {
         book.setRatings(new ArrayList<>());
         bookRepository.save(book);
         return BookDtoMapper.map(book);
+    }
+
+    public void updateBook(Long bookId, BookDto bookDto) {
+        Book bookById = bookRepository.findById(bookId).orElseThrow();
+        bookById.setTitle(bookDto.getTitle());
+        bookById.setAuthor(bookDto.getTitle());
+        bookById.setGenre(genreService.getGenreByName(bookDto.getGenre()));
+        bookById.setIsbn(bookDto.getIsbn());
+        bookRepository.save(bookById);
+    }
+
+    public boolean existByIsbn(Long isbn) {
+        return bookRepository.existsBookByIsbn(isbn);
+    }
+
+    public void deleteBook(Long id) {
+        bookRepository.deleteById(id);
     }
 
 }
