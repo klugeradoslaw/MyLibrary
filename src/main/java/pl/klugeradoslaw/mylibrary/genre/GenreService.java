@@ -27,4 +27,9 @@ public class GenreService {
         List<Genre> allGenres = genreRepository.findAll();
         return allGenres.stream().map(genreDtoMapper::mapToDto).collect(Collectors.toList());
     }
+
+    public Genre getGenreByName(String name) {
+        return genreRepository.findGenreByName(name);
+    }
+
 }

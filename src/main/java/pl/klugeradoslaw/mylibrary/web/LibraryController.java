@@ -65,14 +65,14 @@ public class LibraryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LibraryDto> getLibraryById (@PathVariable Long id) {
+    public ResponseEntity<LibraryDto> getLibraryById(@PathVariable Long id) {
         return libraryService.findLibraryById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/my")
-    public ResponseEntity<List<LibraryDto>> getMyLibraries (Authentication authentication) {
+    public ResponseEntity<List<LibraryDto>> getMyLibraries(Authentication authentication) {
         String currentUserEmail = authentication.getName();
         List<LibraryDto> listOfLibrariesByEmail = libraryService.getListOfLibrariesByEmail(currentUserEmail);
         return ResponseEntity.ok(listOfLibrariesByEmail);
@@ -98,6 +98,7 @@ public class LibraryController {
             return ResponseEntity.ok("You dont have permission to update this library!");
         }
     }
+
     private LibraryDto applyPatch(LibraryDto libraryToUpdateDto, JsonMergePatch patch) throws JsonPatchException, JsonProcessingException {
         JsonNode libraryNode = objectMapper.valueToTree(libraryToUpdateDto);
         JsonNode libraryPatchedNode = patch.apply(libraryNode);
