@@ -99,6 +99,12 @@ public class LibraryController {
         }
     }
 
+    @PutMapping("/{libraryId}/book/{bookId}")
+    public ResponseEntity<?> addBookToLibrary(@PathVariable Long bookId, @PathVariable Long libraryId) {
+        libraryService.addBookToLibrary(bookId, libraryId);
+        return ResponseEntity.ok("Added book to library.");
+    }
+
     private LibraryDto applyPatch(LibraryDto libraryToUpdateDto, JsonMergePatch patch) throws JsonPatchException, JsonProcessingException {
         JsonNode libraryNode = objectMapper.valueToTree(libraryToUpdateDto);
         JsonNode libraryPatchedNode = patch.apply(libraryNode);

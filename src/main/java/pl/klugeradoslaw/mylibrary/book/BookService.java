@@ -1,9 +1,16 @@
 package pl.klugeradoslaw.mylibrary.book;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import pl.klugeradoslaw.mylibrary.book.dto.BookDto;
 import pl.klugeradoslaw.mylibrary.book.dto.BookSaveDto;
 import pl.klugeradoslaw.mylibrary.genre.GenreService;
+import pl.klugeradoslaw.mylibrary.library.Library;
+import pl.klugeradoslaw.mylibrary.library.LibraryDtoMapper;
+import pl.klugeradoslaw.mylibrary.library.LibraryRepository;
+import pl.klugeradoslaw.mylibrary.library.LibraryService;
+import pl.klugeradoslaw.mylibrary.library.dto.LibraryDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +23,11 @@ public class BookService {
     private final BookRepository bookRepository;
     private final GenreService genreService;
 
+
+
     public BookService(BookRepository bookRepository, GenreService genreService) {
         this.bookRepository = bookRepository;
-        this.genreService = genreService;
+        this.genreService = genreService;;
     }
 
     public Optional<BookDto> findBookById(Long id) {
@@ -48,15 +57,6 @@ public class BookService {
         book.setRatings(new ArrayList<>());
         bookRepository.save(book);
         return BookDtoMapper.map(book);
-    }
-
-    public void updateBook(Long bookId, BookDto bookDto) {
-        Book bookById = bookRepository.findById(bookId).orElseThrow();
-        bookById.setTitle(bookDto.getTitle());
-        bookById.setAuthor(bookDto.getTitle());
-        bookById.setGenre(genreService.getGenreByName(bookDto.getGenre()));
-        bookById.setIsbn(bookDto.getIsbn());
-        bookRepository.save(bookById);
     }
 
     public boolean existByIsbn(Long isbn) {

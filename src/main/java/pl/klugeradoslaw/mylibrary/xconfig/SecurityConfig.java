@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .requestMatchers(h2ConsoleRequestMatcher).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/home")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/signup")).permitAll()
-                .requestMatchers(mvcMatcherBuilder.pattern("/books/**")).permitAll()
+                .requestMatchers(mvcMatcherBuilder.pattern("/book/**")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/secured")).hasAnyRole("USER","ADMIN")
                 .requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole("ADMIN")
                 .anyRequest().authenticated()
