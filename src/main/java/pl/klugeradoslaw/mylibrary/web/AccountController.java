@@ -40,6 +40,7 @@ public class AccountController {
             return ResponseEntity.badRequest().body("E-mail is already taken.");
         }
     }
+
     @PatchMapping("/user/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody JsonMergePatch patch, Authentication authentication) {
         String currentUserEmail = authentication.getName();
@@ -69,11 +70,11 @@ public class AccountController {
     }
 
 
+    // TO DO:
+    // when deleting User, method have to delete added by this user ratings and other......
 
-        // TO DO:
-        // when deleting User, method have to delete added by this user ratings and other......
-        @DeleteMapping("/user/{id}")
-        public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
         String currentUserEmail = authentication.getName();
         User userById = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (userById.getEmail().equals(currentUserEmail) ||
