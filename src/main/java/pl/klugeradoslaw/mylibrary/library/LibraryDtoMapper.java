@@ -10,6 +10,7 @@ import pl.klugeradoslaw.mylibrary.user.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LibraryDtoMapper {
@@ -28,7 +29,7 @@ public class LibraryDtoMapper {
         libraryDto.setId(library.getId());
         libraryDto.setUserEmail(library.getUser().getEmail());
         libraryDto.setName(library.getName());
-        libraryDto.setMyBooks(library.getMyBooks().stream().map(Book::getTitle).toList());
+        libraryDto.setMyBooks(library.getMyBooks().stream().map(Book::getTitle).collect(Collectors.toList()));
         return libraryDto;
     }
 
@@ -50,4 +51,5 @@ public class LibraryDtoMapper {
         newLibrary.setMyBooks(books);
         return newLibrary;
     }
+
 }
