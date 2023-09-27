@@ -3,6 +3,8 @@ package pl.klugeradoslaw.mylibrary.user;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.klugeradoslaw.mylibrary.library.LibraryRepository;
+import pl.klugeradoslaw.mylibrary.rating.RatingService;
 import pl.klugeradoslaw.mylibrary.user.dto.UserInfoDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserAccountDto;
 import pl.klugeradoslaw.mylibrary.user.dto.UserResponseDto;
@@ -18,11 +20,15 @@ public class UserService {
     private static final String ADMIN_AUTHORITY = "ROLE_ADMIN";
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
+    private final RatingService ratingService;
+    private final LibraryRepository libraryRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, RatingService ratingService, LibraryRepository libraryRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
+        this.ratingService = ratingService;
+        this.libraryRepository = libraryRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -65,6 +71,8 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
+        ratingService.changeRatingUserIdForNull(id);
+        libraryRepository.deleteAllByUser_id(id);
         userRepository.deleteById(id);
     }
     public void deleteUser(String email) {

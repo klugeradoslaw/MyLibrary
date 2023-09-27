@@ -76,11 +76,12 @@ public class AccountController {
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
         String currentUserEmail = authentication.getName();
+        String emailUserToDelete = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)).getEmail();
         User userById = userService.findUserById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         if (userById.getEmail().equals(currentUserEmail) ||
                 authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             userService.deleteUser(id);
-            return ResponseEntity.ok("User " + currentUserEmail + " deleted successfully.");
+            return ResponseEntity.ok("User " + emailUserToDelete + " deleted successfully.");
         } else {
             return ResponseEntity.ok("You dont have permission to delete this user!");
         }

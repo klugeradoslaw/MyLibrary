@@ -50,7 +50,7 @@ CREATE TABLE book_rating
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     rating INT NOT NULL,
     book_id BIGINT NOT NULL,
-    user_id BIGINT NOT NULL,
+    user_id BIGINT,
     FOREIGN  key(book_id) references books(id),
     FOREIGN  key(user_id) references users(id)
 );

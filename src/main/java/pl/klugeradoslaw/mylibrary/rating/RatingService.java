@@ -37,4 +37,9 @@ public class RatingService {
         return ratingRepository.findByUser_EmailAndBook_Id(userEmail, bookId)
                 .map(Rating::getRating);
     }
+
+    // when user is removed, we dont want to delete rating form this user. Instead of removing rating, change user_id for null in book_rating
+    public void changeRatingUserIdForNull(long id) {
+        ratingRepository.whenUserIsDeleted(id);
+    }
 }
