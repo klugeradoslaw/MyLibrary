@@ -25,7 +25,7 @@ public class SecurityConfig {
         PathRequest.H2ConsoleRequestMatcher h2ConsoleRequestMatcher = PathRequest.toH2Console();
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers(h2ConsoleRequestMatcher).permitAll()
+                .requestMatchers(mvcMatcherBuilder.pattern("/h2-console/**")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/home")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/signup")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/book/**")).permitAll()
