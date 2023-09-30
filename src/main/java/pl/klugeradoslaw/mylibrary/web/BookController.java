@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-
+@Slf4j
 @RestController
-@RequestMapping(
-        path = "/book",
-        produces = {
-                MediaType.APPLICATION_JSON_VALUE
-        }
-)
+@RequestMapping("/book")
 
 public class BookController {
     private BookService bookService;
@@ -67,6 +63,7 @@ public class BookController {
                     .path("/{id}")
                     .buildAndExpand(savedBookDto.getId())
                     .toUri();
+            log.info("Added new book.");
             return ResponseEntity.created(addedBookUri).body(savedBookDto);
         } else {
             return ResponseEntity.badRequest().body("Book with ISBN: " + book.getIsbn() + " already exists.");
@@ -79,6 +76,7 @@ public class BookController {
             try {
                 BookDto bookDto = bookService.findBookById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
                 BookDto bookPatched = applyPatch(bookDto, patch);
+                log.info("Updated book with id={}", id);
                 return ResponseEntity.ok(bookPatched);
             } catch (JsonPatchException | JsonProcessingException e) {
                 return ResponseEntity.internalServerError().build();
@@ -100,6 +98,7 @@ public class BookController {
     public ResponseEntity<?> deleteBook(@PathVariable Long id, Authentication authentication) {
         if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             bookService.deleteBook(id);
+            log.info("Deleted book with id={}", id);
             return ResponseEntity.ok("Book deleted");
         } else {
             return ResponseEntity.ok("Only admin can delete books!");
