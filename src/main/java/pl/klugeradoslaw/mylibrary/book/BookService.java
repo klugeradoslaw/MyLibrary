@@ -1,16 +1,9 @@
 package pl.klugeradoslaw.mylibrary.book;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import pl.klugeradoslaw.mylibrary.book.dto.BookDto;
 import pl.klugeradoslaw.mylibrary.book.dto.BookSaveDto;
 import pl.klugeradoslaw.mylibrary.genre.GenreService;
-import pl.klugeradoslaw.mylibrary.library.Library;
-import pl.klugeradoslaw.mylibrary.library.LibraryDtoMapper;
-import pl.klugeradoslaw.mylibrary.library.LibraryRepository;
-import pl.klugeradoslaw.mylibrary.library.LibraryService;
-import pl.klugeradoslaw.mylibrary.library.dto.LibraryDto;
 
 import java.util.ArrayList;
 import java.util.List;

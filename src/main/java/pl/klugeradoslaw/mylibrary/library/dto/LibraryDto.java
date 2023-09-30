@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.klugeradoslaw.mylibrary.book.Book;
 
 import java.util.List;
 

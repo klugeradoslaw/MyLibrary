@@ -1,7 +1,6 @@
 package pl.klugeradoslaw.mylibrary.user;
 
 import jakarta.persistence.*;
-import pl.klugeradoslaw.mylibrary.book.Book;
 import pl.klugeradoslaw.mylibrary.library.Library;
 
 import java.util.ArrayList;

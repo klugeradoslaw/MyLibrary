@@ -1,6 +1,5 @@
 package pl.klugeradoslaw.mylibrary.rating;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import pl.klugeradoslaw.mylibrary.book.Book;
