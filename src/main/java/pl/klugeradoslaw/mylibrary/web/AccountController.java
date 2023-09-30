@@ -81,6 +81,7 @@ public class AccountController {
         if (userById.getEmail().equals(currentUserEmail) ||
                 authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             userService.deleteUser(id);
+            log.info("Deleted user with id={}", id);
             return ResponseEntity.ok("User " + emailUserToDelete + " deleted successfully.");
         } else {
             return ResponseEntity.ok("You dont have permission to delete this user!");
@@ -94,6 +95,7 @@ public class AccountController {
         if (userByEmail.getEmail().equals(currentUserEmail) ||
                 authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             userService.deleteUser(email);
+            log.info("Deleted user with email={}", email);
             return ResponseEntity.ok("User " + currentUserEmail + " deleted successfully.");
         } else {
             return ResponseEntity.ok("You dont have permission to delete this user!");
