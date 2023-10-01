@@ -43,6 +43,7 @@ public class LibraryController {
                 .path("/{id}")
                 .buildAndExpand(savedLibraryDto.getId())
                 .toUri();
+        log.info("Added new library.");
         return ResponseEntity.created(addedLibraryUri).body(savedLibraryDto);
     }
 
@@ -52,6 +53,7 @@ public class LibraryController {
         if (libraryService.getOwnerByLibraryId(id).equals(currentUserEmail) ||
                 authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             libraryService.deleteLibrary(id);
+            log.info("Deleted library with id ={}", id);
             return ResponseEntity.ok("Library deleted successfully.");
         } else {
             return ResponseEntity.ok("You dont have permission to delete this library!");
@@ -95,6 +97,7 @@ public class LibraryController {
                 return ResponseEntity.notFound().build();
             }
         } else {
+            log.info("Update library with id ={} failed. Permission denied.", id);
             return ResponseEntity.ok("You dont have permission to update this library!");
         }
     }
@@ -102,6 +105,7 @@ public class LibraryController {
     @PutMapping("/{libraryId}/book/{bookId}")
     public ResponseEntity<?> addBookToLibrary(@PathVariable Long bookId, @PathVariable Long libraryId) {
         libraryService.addBookToLibrary(bookId, libraryId);
+        log.info("Book ID={} added to library ID={}.", bookId, libraryId);
         return ResponseEntity.ok("Added book to library.");
     }
 
