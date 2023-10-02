@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  profiles:
+    default: dev
+  liquibase:
+    change-log: classpath:db/master.xml
+  sql:
+    init:
+      mode: never

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <include file="changelog/0001_create_users_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/0002_create_user_role_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/0003_create_user_roles_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/0004_create_genres_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/0005_create_books_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/0006_create_book_rating_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/0007_create_library_table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/0008_create_books_in_library_table.xml" relativeToChangelogFile="true"/>
+
+    <include file="db/testdata/users.sql"/>
+    <include file="db/testdata/user_role.sql"/>
+    <include file="db/testdata/user_roles.sql"/>
+    <include file="db/testdata/genres.sql"/>
+    <include file="db/testdata/books.sql"/>
+    <include file="db/testdata/books_rating.sql"/>
+    <include file="db/testdata/library.sql"/>
+    <include file="db/testdata/books_in_library.sql"/>
+
+</databaseChangeLog>
