@@ -13,13 +13,13 @@
     <include file="changelog/0007_create_library_table.xml" relativeToChangelogFile="true"/>
     <include file="changelog/0008_create_books_in_library_table.xml" relativeToChangelogFile="true"/>
 
-    <include file="db/testdata/users.sql"/>
-    <include file="db/testdata/user_role.sql"/>
-    <include file="db/testdata/user_roles.sql"/>
-    <include file="db/testdata/genres.sql"/>
-    <include file="db/testdata/books.sql"/>
-    <include file="db/testdata/books_rating.sql"/>
-    <include file="db/testdata/library.sql"/>
-    <include file="db/testdata/books_in_library.sql"/>
+    <include context="dev" file="db/testdata/users.sql"/>
+    <include context="dev" file="db/testdata/user_role.sql"/>
+    <include context="dev" file="db/testdata/user_roles.sql"/>
+    <include context="dev" file="db/testdata/genres.sql"/>
+    <include context="dev" file="db/testdata/books.sql"/>
+    <include context="dev" file="db/testdata/books_rating.sql"/>
+    <include context="dev" file="db/testdata/library.sql"/>
+    <include context="dev" file="db/testdata/books_in_library.sql"/>
 
 </databaseChangeLog>
