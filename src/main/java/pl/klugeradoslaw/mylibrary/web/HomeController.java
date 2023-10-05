@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping
     ResponseEntity<String> hello() {
         log.info("Message for EVERYONE.");
         return ResponseEntity.ok("HELLO, YOU CAN SEE IT ALWAYS.");
