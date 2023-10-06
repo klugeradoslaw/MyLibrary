@@ -26,10 +26,13 @@ public class SecurityConfig {
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers(mvcMatcherBuilder.pattern("/h2-console/**")).permitAll()
-                .requestMatchers(mvcMatcherBuilder.pattern("/home")).permitAll()
+                .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
                 .requestMatchers(mvcMatcherBuilder.pattern("/signup")).permitAll()
-                .requestMatchers(mvcMatcherBuilder.pattern("/book/**")).permitAll()
-                .requestMatchers(mvcMatcherBuilder.pattern("/secured")).hasAnyRole("USER","ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/user/**")).hasAnyRole("USER","ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/genre/**")).hasAnyRole("USER","ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/book/**")).hasAnyRole("USER","ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/rating/**")).hasAnyRole("USER","ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/library/**")).hasAnyRole("USER","ADMIN")
                 .requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
