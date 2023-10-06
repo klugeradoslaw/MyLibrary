@@ -18,7 +18,7 @@
     <include context="dev" file="db/testdata/user_roles.sql"/>
     <include context="dev" file="db/testdata/genres.sql"/>
     <include context="dev" file="db/testdata/books.sql"/>
-    <include context="dev" file="db/testdata/books_rating.sql"/>
+    <include context="dev" file="db/testdata/book_rating.sql"/>
     <include context="dev" file="db/testdata/library.sql"/>
     <include context="dev" file="db/testdata/books_in_library.sql"/>
 

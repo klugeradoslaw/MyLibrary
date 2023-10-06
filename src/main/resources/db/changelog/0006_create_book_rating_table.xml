@@ -20,7 +20,7 @@
                              referencedColumnNames="id"/>
             </column>
             <column name="user_id" type="bigint">
-                <constraints nullable="false"
+                <constraints nullable="true"
                              foreignKeyName="fk_rating_user_id"
                              referencedTableName="users"
                              referencedColumnNames="id"/>

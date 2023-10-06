@@ -76,6 +76,9 @@ public class UserService {
         userRepository.deleteById(id);
     }
     public void deleteUser(String email) {
+        Long userId = findUserByEmail(email).orElseThrow().getId();
+        ratingService.changeRatingUserIdForNull(userId);
+        libraryRepository.deleteAllByUser_id(userId);
         userRepository.delete(findUserByEmail(email).orElseThrow(() -> new NoSuchElementException("ERROR: User is not found.)")));
     }
 

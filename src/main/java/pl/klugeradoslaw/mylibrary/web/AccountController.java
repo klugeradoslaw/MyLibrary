@@ -72,6 +72,7 @@ public class AccountController {
 
     // TO DO:
     // when deleting User, method have to delete added by this user ratings and other......
+    // DONE
 
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id, Authentication authentication) {
