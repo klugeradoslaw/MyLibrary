@@ -8,7 +8,7 @@ Instead of asking each friend if they have the book we are interested in - thank
 Selected functionalities:
 * register new user, update user account, delete account
 * creating libraries with your own books, 
-* checking content of libraries  others users (list of purchased books),
+* checking content of libraries  others users (list of purchased irl books),
 * rating books.
 
 ## Built with
@@ -54,25 +54,30 @@ To get a local copy up and running follow these simple steps.
 | GET    | /book/{id}     | Find book by ID.                                                                             |            |
 | GET    | /book          | Get list of all books.                                                                       |            |
 | POST   | /book          | Add new book.                                                                                |            |
-| PATCH  | /book/{id}     | Update book information with id placed in variable path using information in request body.   |            | 
+| PATCH  | /book/{id}     | Update book information with ID placed in variable path using information in request body.   |            | 
 | DELETE | /book/{id}     | Delete book by ID.                                                                           |            | 
-
-### Genre
-| Method | Url            | Description                                                           | Example of valid Request Body     |
-|--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
-| GET    | /genre         | Get list of all genres.                                                                      |            |
 
 ### Library
 | Method | Url            | Description                                                           | Example of valid Request Body     |
 |--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
 | GET    | /library/{id}  | Find library by ID.                                                                          |            |
 | GET    | /library       | Get list of all libraries.                                                                   |            |
-| GET    | /library?email=| Get list of all libraries by users's email.                                                  |            |
+| GET    | /library?email=| Get list of all libraries by users's email (request param).                                  |            |
 | GET    | /library/my    | Get list of yours libraries.                                                                 |            |
 | POST   | /library       | Add new library.                                                                             |            |
 | PATCH  | /library/{id}  | Update library information with ID placed in variable path using information in request body.|            | 
 | PUT    | /library/{libraryId}/book/{bookId}| Add book to your library.                                                 |            |
 | DELETE | /library/{id}  | Delete library by ID.                                                                        |            |  
+
+### Others
+| Method | Url            | Description                                                           | Example of valid Request Body     |
+|--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
+| GET    | /genre         | Get list of all genres.                                                                      |            |
+| POST   | /rating?bookId=X&rating=X| Add or update book rating (request params).                                        |            |
+| GET    | /user/{id}     | Get user info by ID placed in path variable.                                                 |            |
+| GET    | /user?email=   | Get user info by email as a request param.                                                   |            |
+
+Examples of valid Request Bodies in progress...
 
 ## To do:
 
