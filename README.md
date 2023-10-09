@@ -12,8 +12,7 @@ Selected functionalities:
 * rating books.
 
 ## Built with
-
-* Java 17
+* Java
 * Apache Maven
 * MySQL
 * Hibernate
@@ -24,12 +23,10 @@ Selected functionalities:
 * Git
 
 ## Getting Started
-
-#### App works on 34.118.29.234
+App works on 34.118.29.234
 Feel free to check functionalities by f.e. Postman. Adding port isn't required thanks to nginx.
 
 #### With Maven:
-
 To get a local copy up and running follow these simple steps.
 
 1. Clone the repository
@@ -44,18 +41,41 @@ To get a local copy up and running follow these simple steps.
 ## Available endpoints
 
 ### Account
+| Method | Url            | Description                                                           | Example of valid Request Body     |
+|--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
+| POST   | /signup        | Register new User.                                                                           |            |
+| PATCH  | /user/{id}     | Update User data (account).                                                                  |            |
+| DELETE | /user/{id}     | Delete user by ID.                                                                           |            |
+| DELETE | /user?email=   | Delete user by email.                                                                        |            | 
 
-| Method | Url            | Description                                                                                        | Example of valid Request Body                                                                                                                                                                                         |
-|--------|----------------|----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| POST   | /signup        | Register new User.  | |
-| PATCH  | /user/{id}     | Update User data (account).|    |
-| DELETE | /user/{id}     | Changing a student with an id placed in the path variable to a student placed in the request body. |            |
-| DELETE | /user?email=   | Update student information with id placed in variable path using information in request body.      | 
+### Book
+| Method | Url            | Description                                                           | Example of valid Request Body     |
+|--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
+| GET    | /book/{id}     | Find book by ID.                                                                             |            |
+| GET    | /book          | Get list of all books.                                                                       |            |
+| POST   | /book          | Add new book.                                                                                |            |
+| PATCH  | /book/{id}     | Update book information with id placed in variable path using information in request body.   |            | 
+| DELETE | /book/{id}     | Delete book by ID.                                                                           |            | 
 
-.... IN PROGRESS ....
+### Genre
+| Method | Url            | Description                                                           | Example of valid Request Body     |
+|--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
+| GET    | /genre         | Get list of all genres.                                                                      |            |
+
+### Library
+| Method | Url            | Description                                                           | Example of valid Request Body     |
+|--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
+| GET    | /library/{id}  | Find library by ID.                                                                          |            |
+| GET    | /library       | Get list of all libraries.                                                                   |            |
+| GET    | /library?email=| Get list of all libraries by users's email.                                                  |            |
+| GET    | /library/my    | Get list of yours libraries.                                                                 |            |
+| POST   | /library       | Add new library.                                                                             |            |
+| PATCH  | /library/{id}  | Update library information with ID placed in variable path using information in request body.|            | 
+| PUT    | /library/{libraryId}/book/{bookId}| Add book to your library.                                                 |            |
+| DELETE | /library/{id}  | Delete library by ID.                                                                        |            |  
 
 ## To do:
 
+- [ ] Tests
 - [ ] Friend list
 - [ ] Functionality - library visible for everyone or only for friends
-- [ ] Friend list
