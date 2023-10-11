@@ -43,8 +43,8 @@ To get a local copy up and running follow these simple steps.
 ### Account
 | Method | Url            | Description                                                           | Example of valid Request Body     |
 |--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
-| POST   | /signup        | Register new User.                                                                           |            |
-| PATCH  | /user/{id}     | Update User data (account).                                                                  |            |
+| POST   | /signup        | Register new User.                                                                           |{<br>"email": "new@email.com",<br>"name": "UserXYZ",<br>   "password": "hardPassword"<br>}|
+| PATCH  | /user/{id}     | Update User data (account).                                                                  |{<br>"email": "new2@email.com",<br>"name": "New Name"<br>}|
 | DELETE | /user/{id}     | Delete user by ID.                                                                           |            |
 | DELETE | /user?email=   | Delete user by email.                                                                        |            | 
 
@@ -53,8 +53,8 @@ To get a local copy up and running follow these simple steps.
 |--------|----------------|-----------------------------------------------------------------------|-----------------------------------|
 | GET    | /book/{id}     | Find book by ID.                                                                             |            |
 | GET    | /book          | Get list of all books.                                                                       |            |
-| POST   | /book          | Add new book.                                                                                |            |
-| PATCH  | /book/{id}     | Update book information with ID placed in variable path using information in request body.   |            | 
+| POST   | /book          | Add new book.                                                                                | {<br>"title": "Wiedźmin. Tom 1. Ostatnie życzenie",<br>"author": "Andrzej Sapkowski",<br>"genre": "fantasy",<br>"isbn": 9788375781809<br>}|
+| PATCH  | /book/{id}     | Update book information with ID placed in variable path using information in request body.   | {<br>"isbn": 9788375781808<br>}|
 | DELETE | /book/{id}     | Delete book by ID.                                                                           |            | 
 
 ### Library
