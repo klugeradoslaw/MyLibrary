@@ -17,8 +17,10 @@ Selected functionalities:
 * MySQL
 * Hibernate
 * H2
+* Liquibase
 * Spring Web
 * Spring Data
+* Spring Security
 * Docker
 * Git
 
@@ -64,8 +66,8 @@ To get a local copy up and running follow these simple steps.
 | GET    | /library       | Get list of all libraries.                                                                   |            |
 | GET    | /library?email=| Get list of all libraries by users's email (request param).                                  |            |
 | GET    | /library/my    | Get list of yours libraries.                                                                 |            |
-| POST   | /library       | Add new library.                                                                             |            |
-| PATCH  | /library/{id}  | Update library information with ID placed in variable path using information in request body.|            | 
+| POST   | /library?libraryName=| Add new library.                                                                       |            |
+| PATCH  | /library/{id}  | Update library information with ID placed in variable path using information in request body.|{<br>"name": new Library Name<br>}            | 
 | PUT    | /library/{libraryId}/book/{bookId}| Add book to your library.                                                 |            |
 | DELETE | /library/{id}  | Delete library by ID.                                                                        |            |  
 
@@ -76,8 +78,6 @@ To get a local copy up and running follow these simple steps.
 | POST   | /rating?bookId=X&rating=X| Add or update book rating (request params).                                        |            |
 | GET    | /user/{id}     | Get user info by ID placed in path variable.                                                 |            |
 | GET    | /user?email=   | Get user info by email as a request param.                                                   |            |
-
-Examples of valid Request Bodies in progress...
 
 ## To do:
 
