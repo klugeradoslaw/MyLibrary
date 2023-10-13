@@ -3,13 +3,13 @@ package pl.klugeradoslaw.mylibrary.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import pl.klugeradoslaw.mylibrary.rating.RatingService;
 
 @Slf4j
-@Controller
+@RestController
 public class RatingController {
 
     private final RatingService ratingService;

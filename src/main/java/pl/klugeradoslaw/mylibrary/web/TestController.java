@@ -3,15 +3,15 @@ package pl.klugeradoslaw.mylibrary.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.klugeradoslaw.mylibrary.user.UserService;
 import pl.klugeradoslaw.mylibrary.user.dto.UserResponseDto;
 
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 public class TestController {
 
     private final UserService userService;

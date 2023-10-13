@@ -1,16 +1,16 @@
 package pl.klugeradoslaw.mylibrary.web;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.klugeradoslaw.mylibrary.genre.GenreService;
 import pl.klugeradoslaw.mylibrary.genre.dto.GenreDto;
 
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/genre")
 public class GenreController {
     private final GenreService genreService;
